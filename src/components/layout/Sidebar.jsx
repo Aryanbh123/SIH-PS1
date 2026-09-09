@@ -1,25 +1,117 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import { 
-  LayoutDashboard, 
-  ShieldCheck, 
-  ClipboardList, 
-  AlertTriangle, 
-  Map, 
-  Settings,
-  HardHat
+  LayoutDashboard, ShieldCheck, ClipboardList, AlertTriangle, Map, 
+  Settings, HardHat, FileText, Bell, MessageSquare, BrainCircuit,
+  CheckSquare, PlusCircle, Activity, Wifi, Users, BarChart3, TrendingUp,
+  Globe, Search, FileBadge, FolderOpen
 } from 'lucide-react';
 
 const Sidebar = () => {
-  const navItems = [
-    { name: 'Dashboard', path: '/', icon: LayoutDashboard },
-    { name: 'Compliance', path: '/compliance', icon: ShieldCheck },
-    { name: 'Inspections', path: '/inspections', icon: ClipboardList },
-    { name: 'Incidents & Actions', path: '/actions', icon: AlertTriangle },
-    { name: 'GIS Map', path: '/map', icon: Map },
-    { name: 'Contractors', path: '/contractors', icon: HardHat },
-    { name: 'Settings', path: '/settings', icon: Settings },
-  ];
+  const { currentUser } = useAuth();
+
+  const getNavItems = (role) => {
+    switch (role) {
+      case 'manager':
+        return [
+          { name: 'Dashboard', path: '/', icon: LayoutDashboard },
+          { name: 'Compliance', path: '/compliance', icon: ShieldCheck },
+          { name: 'Inspections', path: '/inspections', icon: ClipboardList },
+          { name: 'Violations', path: '/violations', icon: AlertTriangle },
+          { name: 'Corrective Actions', path: '/actions', icon: CheckSquare },
+          { name: 'Contractors', path: '/contractors', icon: HardHat },
+          { name: 'Alerts', path: '/alerts', icon: Bell },
+          { name: 'Grievances', path: '/grievances', icon: MessageSquare },
+          { name: 'Reports', path: '/reports', icon: FileText },
+          { name: 'AI Insights', path: '/ai-insights', icon: BrainCircuit },
+        ];
+      case 'safety_officer':
+        return [
+          { name: 'Today\'s Tasks', path: '/', icon: CheckSquare },
+          { name: 'Inspections', path: '/inspections', icon: ClipboardList },
+          { name: 'Safety Observations', path: '/observations', icon: Search },
+          { name: 'Incidents', path: '/incidents', icon: AlertTriangle },
+          { name: 'Violations', path: '/violations', icon: AlertTriangle },
+          { name: 'Corrective Actions', path: '/actions', icon: CheckSquare },
+          { name: 'Alerts', path: '/alerts', icon: Bell },
+          { name: 'Grievances', path: '/grievances', icon: MessageSquare },
+        ];
+      case 'employee': // Field Inspector
+        return [
+          { name: 'Today\'s Tasks', path: '/', icon: CheckSquare },
+          { name: 'New Inspection', path: '/inspections/new', icon: PlusCircle },
+          { name: 'Quick Report', path: '/quick-report', icon: AlertTriangle },
+          { name: 'My Status', path: '/my-status', icon: Activity },
+          { name: 'Grievances', path: '/grievances', icon: MessageSquare },
+          { name: 'Sync Status', path: '/sync-status', icon: Wifi },
+        ];
+      case 'subsidiary_gm':
+        return [
+          { name: 'Executive Dashboard', path: '/', icon: LayoutDashboard },
+          { name: 'Mine Comparison', path: '/comparison', icon: BarChart3 },
+          { name: 'Risk Heatmap', path: '/heatmap', icon: Map },
+          { name: 'Violations', path: '/violations', icon: AlertTriangle },
+          { name: 'Escalations', path: '/escalations', icon: Bell },
+          { name: 'AI Insights', path: '/ai-insights', icon: BrainCircuit },
+          { name: 'Cross-Mine Analytics', path: '/analytics', icon: TrendingUp },
+          { name: 'Reports', path: '/reports', icon: FileText },
+        ];
+      case 'cil_hq_director':
+        return [
+          { name: 'Enterprise Dashboard', path: '/', icon: Globe },
+          { name: 'Subsidiaries', path: '/subsidiaries', icon: Users },
+          { name: 'Cross-Mine Analytics', path: '/analytics', icon: TrendingUp },
+          { name: 'Systemic Risks', path: '/systemic-risks', icon: AlertTriangle },
+          { name: 'AI Insights', path: '/ai-insights', icon: BrainCircuit },
+          { name: 'Trends', path: '/trends', icon: BarChart3 },
+          { name: 'Reports', path: '/reports', icon: FileText },
+        ];
+      case 'ministry': // DGMS Regulator
+        return [
+          { name: 'Regulator Dashboard', path: '/', icon: LayoutDashboard },
+          { name: 'Mines', path: '/mines', icon: Map },
+          { name: 'Compliance', path: '/compliance', icon: ShieldCheck },
+          { name: 'Violations', path: '/violations', icon: AlertTriangle },
+          { name: 'Inspections', path: '/inspections', icon: ClipboardList },
+          { name: 'Evidence', path: '/evidence', icon: FolderOpen },
+          { name: 'Audit Trail', path: '/audit-trail', icon: Search },
+          { name: 'Reports', path: '/reports', icon: FileText },
+        ];
+      case 'contractor':
+        return [
+          { name: 'Dashboard', path: '/', icon: LayoutDashboard },
+          { name: 'Compliance', path: '/compliance', icon: ShieldCheck },
+          { name: 'Licences', path: '/licences', icon: FileBadge },
+          { name: 'Training', path: '/training', icon: Users },
+          { name: 'Tasks', path: '/tasks', icon: CheckSquare },
+          { name: 'Corrective Actions', path: '/actions', icon: AlertTriangle },
+          { name: 'Documents', path: '/documents', icon: FolderOpen },
+        ];
+      case 'employer':
+        return [
+          { name: 'Employer Dashboard', path: '/', icon: LayoutDashboard },
+          { name: 'Employee Management', path: '/employees', icon: Users },
+          { name: 'Attendance', path: '/attendance', icon: ClipboardList },
+          { name: 'Employee Compliance', path: '/employee-compliance', icon: ShieldCheck },
+          { name: 'Training Tracking', path: '/training', icon: FileBadge },
+          { name: 'Document Verification', path: '/documents', icon: FolderOpen },
+          { name: 'Assigned Tasks', path: '/actions', icon: CheckSquare },
+          { name: 'Safety & Incidents', path: '/incidents', icon: AlertTriangle },
+          { name: 'Grievances', path: '/grievances', icon: MessageSquare },
+          { name: 'Alerts', path: '/alerts', icon: Bell },
+          { name: 'Compliance History', path: '/compliance-history', icon: FileText },
+        ];
+      default:
+        return [
+          { name: 'Dashboard', path: '/', icon: LayoutDashboard }
+        ];
+    }
+  };
+
+  if (!currentUser) return null;
+
+  const navItems = getNavItems(currentUser.role);
 
   return (
     <aside className="w-64 bg-[#0f172a] text-slate-300 flex flex-col h-screen fixed left-0 top-0">
@@ -40,7 +132,7 @@ const Sidebar = () => {
                 to={item.path}
                 className={({ isActive }) =>
                   `flex items-center px-3 py-2.5 rounded-md transition-colors ${
-                    isActive 
+                    isActive && item.path === window.location.pathname
                       ? 'bg-slate-800 text-white border-l-4 border-yellow-400' 
                       : 'hover:bg-slate-800 hover:text-white border-l-4 border-transparent'
                   }`

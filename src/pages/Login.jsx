@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { User, Briefcase, Building, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { User, Briefcase, Building, Eye, EyeOff, Loader2, ShieldAlert, Users, Globe, HardHat, Factory } from 'lucide-react';
 import { languages, t } from '../data/translations';
 
 const Login = () => {
@@ -21,9 +21,14 @@ const Login = () => {
 
   // We map the roles dynamically so their names translate
   const getRoles = (lang) => [
-    { id: 'employee', name: t(lang, 'employee'), icon: User },
     { id: 'manager', name: t(lang, 'manager'), icon: Briefcase },
-    { id: 'ministry', name: t(lang, 'ministry'), icon: Building }
+    { id: 'safety_officer', name: t(lang, 'safetyOfficer') || 'Safety Officer', icon: ShieldAlert },
+    { id: 'employee', name: t(lang, 'employee'), icon: User },
+    { id: 'subsidiary_gm', name: t(lang, 'subsidiaryGM') || 'Subsidiary GM', icon: Users },
+    { id: 'cil_hq_director', name: t(lang, 'cilHqDirector') || 'HQ Director', icon: Globe },
+    { id: 'ministry', name: t(lang, 'ministry'), icon: Building },
+    { id: 'contractor', name: t(lang, 'contractor') || 'Contractor', icon: HardHat },
+    { id: 'employer', name: t(lang, 'employer') || 'Employer', icon: Factory }
   ];
 
   const handleLogin = async (e) => {
@@ -65,7 +70,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="sm:mx-auto sm:w-full sm:max-w-2xl">
         
         {/* Header Section */}
         <div className="flex flex-col items-center mb-6">
@@ -98,8 +103,8 @@ const Login = () => {
           {/* 2. Role Selection Grid */}
           <div className="mb-6">
             <label className="block text-sm font-semibold text-slate-700 mb-2">{t(language, 'selectRole')}</label>
-            <div className="grid grid-cols-2 gap-3">
-              {currentRoles.slice(0, 2).map((role) => {
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              {currentRoles.map((role) => {
                 const Icon = role.icon;
                 const isSelected = selectedRole === role.id;
                 return (
@@ -107,41 +112,19 @@ const Login = () => {
                     key={role.id}
                     type="button"
                     onClick={() => handleRoleSelect(role.id)}
-                    className={`flex flex-col items-center justify-center py-4 px-2 rounded-lg border-2 transition-all ${
+                    className={`flex flex-col items-center justify-center py-3 px-2 rounded-lg border-2 transition-all ${
                       isSelected 
                         ? 'border-emerald-500 bg-emerald-50 text-emerald-700 shadow-sm' 
                         : 'border-slate-200 bg-white text-slate-500 hover:border-slate-300 hover:bg-slate-50'
                     }`}
                   >
-                    <Icon className={`w-6 h-6 mb-2 ${isSelected ? 'text-emerald-600' : 'text-slate-400'}`} />
-                    <span className={`text-sm font-bold ${isSelected ? 'text-emerald-700' : 'text-slate-700'}`}>
+                    <Icon className={`w-5 h-5 mb-1.5 ${isSelected ? 'text-emerald-600' : 'text-slate-400'}`} />
+                    <span className={`text-[11px] leading-tight text-center font-bold ${isSelected ? 'text-emerald-700' : 'text-slate-700'}`}>
                       {role.name}
                     </span>
                   </button>
                 );
               })}
-              {/* Ministry spans 2 columns */}
-              {(() => {
-                const ministryRole = currentRoles[2];
-                const MinistryIcon = ministryRole.icon;
-                const isSelected = selectedRole === ministryRole.id;
-                return (
-                  <button
-                    type="button"
-                    onClick={() => handleRoleSelect(ministryRole.id)}
-                    className={`col-span-2 flex flex-col items-center justify-center py-4 px-2 rounded-lg border-2 transition-all ${
-                      isSelected 
-                        ? 'border-emerald-500 bg-emerald-50 text-emerald-700 shadow-sm' 
-                        : 'border-slate-200 bg-white text-slate-500 hover:border-slate-300 hover:bg-slate-50'
-                    }`}
-                  >
-                    <MinistryIcon className={`w-6 h-6 mb-2 ${isSelected ? 'text-emerald-600' : 'text-slate-400'}`} />
-                    <span className={`text-sm font-bold ${isSelected ? 'text-emerald-700' : 'text-slate-700'}`}>
-                      {ministryRole.name}
-                    </span>
-                  </button>
-                );
-              })()}
             </div>
           </div>
 

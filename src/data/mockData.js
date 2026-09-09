@@ -1,19 +1,11 @@
 export const currentUser = {
   id: "U-1001",
   name: "Rajesh Kumar",
-  role: "Corporate Compliance Officer",
+  role: "manager",
   avatar: "https://ui-avatars.com/api/?name=Rajesh+Kumar&background=0f4c81&color=fff"
 };
 
 export const demoUsers = [
-  {
-    role: "employee",
-    userId: "employee@demo.local",
-    password: "demo123",
-    name: "Amit Desai",
-    designation: "Field Inspector",
-    avatar: "https://ui-avatars.com/api/?name=Amit+Desai&background=0ea5e9&color=fff"
-  },
   {
     role: "manager",
     userId: "manager@demo.local",
@@ -23,15 +15,62 @@ export const demoUsers = [
     avatar: "https://ui-avatars.com/api/?name=Rajesh+Kumar&background=0f4c81&color=fff"
   },
   {
+    role: "safety_officer",
+    userId: "safety_officer@demo.local",
+    password: "demo123",
+    name: "Sunil Verma",
+    designation: "Safety Officer",
+    avatar: "https://ui-avatars.com/api/?name=Sunil+Verma&background=10b981&color=fff"
+  },
+  {
+    role: "employee",
+    userId: "employee@demo.local",
+    password: "demo123",
+    name: "Amit Desai",
+    designation: "Field Inspector",
+    avatar: "https://ui-avatars.com/api/?name=Amit+Desai&background=0ea5e9&color=fff"
+  },
+  {
+    role: "subsidiary_gm",
+    userId: "subsidiary_gm@demo.local",
+    password: "demo123",
+    name: "Prakash Patel",
+    designation: "Subsidiary GM",
+    avatar: "https://ui-avatars.com/api/?name=Prakash+Patel&background=8b5cf6&color=fff"
+  },
+  {
+    role: "cil_hq_director",
+    userId: "cil_hq_director@demo.local",
+    password: "demo123",
+    name: "R. K. Srivastava",
+    designation: "CIL HQ Director",
+    avatar: "https://ui-avatars.com/api/?name=R+K+Srivastava&background=f59e0b&color=fff"
+  },
+  {
     role: "ministry",
     userId: "ministry@demo.local",
     password: "demo123",
     name: "Dr. S. K. Singh",
     designation: "DGMS Regulator",
     avatar: "https://ui-avatars.com/api/?name=S+K+Singh&background=475569&color=fff"
+  },
+  {
+    role: "contractor",
+    userId: "contractor@demo.local",
+    password: "demo123",
+    name: "L&T Mining Services",
+    designation: "Contractor",
+    avatar: "https://ui-avatars.com/api/?name=LT+Mining&background=f43f5e&color=fff"
+  },
+  {
+    role: "employer",
+    userId: "employer@demo.local",
+    password: "demo123",
+    name: "Adani Enterprises",
+    designation: "Employer",
+    avatar: "https://ui-avatars.com/api/?name=Adani+Enterprises&background=1e40af&color=fff"
   }
 ];
-
 
 export const mines = [
   { id: "M-001", name: "Gevra Open Cast Project", subsidiary: "SECL", type: "Open Cast", complianceScore: 82, riskLevel: "Medium" },
@@ -155,3 +194,4 @@ export const dashboardStats = {
   overdueActions: 28,
   inspectionsToday: 45
 };
+
