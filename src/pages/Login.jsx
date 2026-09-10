@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { User, Briefcase, Building, Eye, EyeOff, Loader2, ShieldAlert, Users, Globe, HardHat, Factory, Lock, ChevronDown, Check, AlertTriangle } from 'lucide-react';
 import { ComboBox, Label, Input, Button as AriaButton, Popover, ListBox, ListBoxItem } from 'react-aria-components';
-import { languages, t } from '../data/translations';
+import { useLanguage } from '../context/LanguageContext';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -19,17 +19,19 @@ const Login = () => {
   // 'en' is default language code
   const [language, setLanguage] = useState('en');
   const [subsidiary, setSubsidiary] = useState('WCL - Western Coalfields Limited');
+  const { language, setLanguage, t, languages } = useLanguage();
+  const [subsidiary, setSubsidiary] = useState('SECL - South Eastern Coalfields Limited');
 
   // We map the roles dynamically so their names translate
-  const getRoles = (lang) => [
-    { id: 'manager', name: t(lang, 'manager'), icon: Briefcase },
-    { id: 'worker', name: t(lang, 'worker') || 'Worker', icon: HardHat },
-    { id: 'safety_officer', name: t(lang, 'safetyOfficer') || 'Safety Officer', icon: ShieldAlert },
-    { id: 'employee', name: t(lang, 'employee'), icon: User },
-    { id: 'subsidiary_gm', name: t(lang, 'subsidiaryGM') || 'Subsidiary GM', icon: Users },
-    { id: 'cil_hq_director', name: t(lang, 'cilHqDirector') || 'HQ Director', icon: Globe },
-    { id: 'ministry', name: t(lang, 'ministry'), icon: Building },
-    { id: 'contractor', name: t(lang, 'contractor') || 'Contractor', icon: HardHat }
+  const getRoles = () => [
+    { id: 'manager', name: t('manager'), icon: Briefcase },
+    { id: 'worker', name: t('worker') || 'Worker', icon: HardHat },
+    { id: 'safety_officer', name: t('safetyOfficer') || 'Safety Officer', icon: ShieldAlert },
+    { id: 'employee', name: t('employee'), icon: User },
+    { id: 'subsidiary_gm', name: t('subsidiaryGM') || 'Subsidiary GM', icon: Users },
+    { id: 'cil_hq_director', name: t('cilHqDirector') || 'HQ Director', icon: Globe },
+    { id: 'ministry', name: t('ministry'), icon: Building },
+    { id: 'contractor', name: t('contractor') || 'Contractor', icon: HardHat }
   ];
 
   const handleLogin = async (e) => {
@@ -37,11 +39,11 @@ const Login = () => {
     setError('');
 
     if (!userId.trim()) {
-      setError(t(language, 'errorUserId'));
+      setError(t('errorUserId'));
       return;
     }
     if (!password.trim()) {
-      setError(t(language, 'errorPassword'));
+      setError(t('errorPassword'));
       return;
     }
 
@@ -108,7 +110,7 @@ const Login = () => {
                 menuTrigger="focus"
               >
                 <Label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                  {t(language, 'selectLanguage')}
+                  {t('selectLanguage')}
                 </Label>
                 <div className="relative w-full">
                   <Input 
@@ -148,7 +150,7 @@ const Login = () => {
 
             {/* 2. Role Selection Grid */}
             <div>
-              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">{t(language, 'selectRole')}</label>
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">{t('selectRole')}</label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {currentRoles.map((role) => {
                   const Icon = role.icon;
@@ -182,7 +184,7 @@ const Login = () => {
             {/* 3. Conditional Subsidiary Dropdown */}
             {selectedRole !== 'ministry' && (
               <div>
-                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">{t(language, 'selectSubsidiary')}</label>
+                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">{t('selectSubsidiary')}</label>
                 <select 
                   value={subsidiary}
                   onChange={(e) => setSubsidiary(e.target.value)}
@@ -205,7 +207,7 @@ const Login = () => {
             <form className="space-y-5" onSubmit={handleLogin}>
               <div>
                 <label htmlFor="userId" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                  {t(language, 'userId')}
+                  {t('userId')}
                 </label>
                 <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
@@ -224,7 +226,7 @@ const Login = () => {
 
               <div>
                 <label htmlFor="password" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                  {t(language, 'password')}
+                  {t('password')}
                 </label>
                 <div className="relative group">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
@@ -274,17 +276,17 @@ const Login = () => {
                   {isLoading ? (
                     <>
                       <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                      {t(language, 'signingIn')}
+                      {t('signingIn')}
                     </>
                   ) : (
-                    t(language, 'signIn')
+                    t('signIn')
                   )}
                 </button>
               </div>
               
               <div className="text-center mt-6 border-t border-slate-100 pt-5">
                 <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-[#f1f5f9] text-[#64748b]">
-                  {t(language, 'prototypeMsg')}
+                  {t('prototypeMsg')}
                 </span>
               </div>
             </form>

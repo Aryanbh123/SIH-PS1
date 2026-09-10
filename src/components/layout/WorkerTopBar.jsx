@@ -2,10 +2,12 @@ import React from 'react';
 import { Bell } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useWorker } from '../../context/WorkerContext';
+import { useLanguage } from '../../context/LanguageContext';
 
 const WorkerTopBar = () => {
   const { currentUser } = useAuth();
   const workerContext = useWorker();
+  const { t } = useLanguage();
   
   const unreadNotifications = workerContext?.notifications?.filter(n => !n.read).length || 0;
 

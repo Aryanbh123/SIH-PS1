@@ -2,9 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { LayoutGrid, ClipboardList, Clock, Shield, User } from 'lucide-react';
 import { useWorker } from '../../context/WorkerContext';
+import { useLanguage } from '../../context/LanguageContext';
 
 const WorkerBottomNav = () => {
   const workerContext = useWorker();
+  const { t } = useLanguage();
   const unreadNotifications = workerContext?.notifications?.filter(n => !n.read).length || 0;
   const pendingTasks = workerContext?.tasks?.filter(t => t.status !== 'completed').length || 0;
 
@@ -18,7 +20,7 @@ const WorkerBottomNav = () => {
           }
         >
           <LayoutGrid className="w-5 h-5" />
-          <span className="text-[10px] font-bold">Home</span>
+          <span className="text-[10px] font-bold">{t('navigation.dashboard')}</span>
         </NavLink>
         
         <NavLink 
@@ -28,7 +30,7 @@ const WorkerBottomNav = () => {
           }
         >
           <ClipboardList className="w-5 h-5" />
-          <span className="text-[10px] font-medium">My Work</span>
+          <span className="text-[10px] font-medium">{t('navigation.myWork')}</span>
           {pendingTasks > 0 && (
             <span className="absolute -top-1 right-1 w-3.5 h-3.5 bg-[#136c4b] text-white text-[9px] font-bold rounded-full flex items-center justify-center">
               {pendingTasks}
@@ -43,7 +45,7 @@ const WorkerBottomNav = () => {
           }
         >
           <Clock className="w-5 h-5" />
-          <span className="text-[10px] font-medium">Attendance</span>
+          <span className="text-[10px] font-medium">{t('navigation.attendance')}</span>
         </NavLink>
         
         <NavLink 
@@ -53,7 +55,7 @@ const WorkerBottomNav = () => {
           }
         >
           <Shield className="w-5 h-5" />
-          <span className="text-[10px] font-medium">Safety</span>
+          <span className="text-[10px] font-medium">{t('navigation.safety')}</span>
         </NavLink>
         
         <NavLink 
@@ -63,7 +65,7 @@ const WorkerBottomNav = () => {
           }
         >
           <User className="w-5 h-5" />
-          <span className="text-[10px] font-medium">Profile</span>
+          <span className="text-[10px] font-medium">{t('navigation.profile')}</span>
         </NavLink>
       </div>
     </nav>

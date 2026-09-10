@@ -6,10 +6,29 @@ import {
   MapPin, AlertCircle, Award, ChevronRight,
   ShieldCheck, Activity, BookOpen, Clock3
 } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 const WorkerDashboard = () => {
   const { profile, tasks, attendance, shifts, correctiveActions, notifications } = useWorker();
-  const [timeLeft, setTimeLeft] = useState('04h 42m left');
+  const { t } = useLanguage();
+  const [timeLeft, setTimeLeft] = useState('04:42:00');
+
+  // Helper to translate mock data
+  const tm = (str) => {
+    const map = {
+      'Morning Shift': t('mock.morningShift'),
+      'Safety Refresher': t('mock.safetyRefresher'),
+      'Mining Area A': t('mock.miningAreaA'),
+      'Kamptee Colliery': t('mock.kampteeColliery'),
+      'Mining Worker': t('mock.miningWorker'),
+      'Mining Operations': t('mock.miningOperations'),
+      'WCL': t('mock.wcl'),
+      'Replace worn out safety boots': t("mock.Replace worn out safety boots"),
+      'Task Assigned: Clear Conveyor Belt Jam': t("mock.Task Assigned: Clear Conveyor Belt Jam"),
+      '2 hours ago': t("mock.2 hours ago")
+    };
+    return map[str] || str;
+  };
 
   // Calculate summaries
   const pendingTasks = tasks?.filter(t => t.status !== 'Completed').length || 0;
@@ -33,12 +52,12 @@ const WorkerDashboard = () => {
       <div className="space-y-5">
         <div className="flex flex-col gap-1.5">
           <h2 className="text-3xl font-black text-slate-900 tracking-tight">
-            Good morning, {profile?.name?.split(' ')[0] || 'Rahul'}
+            {t('dashboard.greeting', { name: profile?.name?.split(' ')[0] || 'Rahul' })}
           </h2>
           <div className="flex items-center gap-2">
             <span className="flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 font-bold text-xs rounded-full border border-emerald-100 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Online
+              {t('dashboard.online')}
             </span>
           </div>
         </div>
@@ -54,13 +73,13 @@ const WorkerDashboard = () => {
               </div>
               <div>
                 <div className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-1">
-                  CURRENT SHIFT
+                  {t('dashboard.currentShift')}
                 </div>
                 <div className="text-2xl font-black text-slate-900 tracking-tight">
                   {currentShift?.time}
                 </div>
                 <div className="text-sm font-bold text-slate-500 mt-1 flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-[#136c4b]" /> {profile?.location || 'Mining Area A'}
+                  <MapPin className="w-4 h-4 text-[#136c4b]" /> {tm(profile?.location || 'Mining Area A')}
                 </div>
               </div>
             </div>
@@ -71,7 +90,7 @@ const WorkerDashboard = () => {
               <Clock3 className="w-4 h-4" /> {timeLeft}
             </div>
             <div className="text-xs font-bold px-3 py-1.5 bg-emerald-50 text-emerald-700 rounded-lg border border-emerald-100">
-              On Schedule
+              {t('dashboard.onSchedule')}
             </div>
           </div>
         </div>
@@ -79,22 +98,22 @@ const WorkerDashboard = () => {
 
       {/* MY DAY OVERVIEW */}
       <div className="space-y-4">
-        <h3 className="text-[13px] font-bold text-slate-500 uppercase tracking-widest pl-1">My Day</h3>
+        <h3 className="text-[13px] font-bold text-slate-500 uppercase tracking-widest pl-1">{t('dashboard.myDay')}</h3>
         
         <div className="grid grid-cols-3 gap-3 sm:gap-4">
           <div className="bg-white/95 backdrop-blur-xl p-5 rounded-3xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] border border-white border-b-slate-200 flex flex-col items-center justify-center text-center transition-all hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.08)]">
             <ShieldCheck className="w-7 h-7 text-emerald-500 mb-3" />
-            <span className="text-[11px] text-slate-400 font-bold uppercase tracking-widest">Attendance</span>
+            <span className="text-[11px] text-slate-400 font-bold uppercase tracking-widest">{t('navigation.attendance')}</span>
             <div className="text-sm sm:text-base font-black text-slate-900 mt-1">
-              {todayAttendance ? 'Present' : 'Pending'}
+              {todayAttendance ? t('dashboard.present') : t('common.pending')}
             </div>
           </div>
           
           <div className="bg-white/95 backdrop-blur-xl p-5 rounded-3xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] border border-white border-b-slate-200 flex flex-col items-center justify-center text-center transition-all hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.08)]">
             <Clock3 className="w-7 h-7 text-[#136c4b] mb-3" />
-            <span className="text-[11px] text-slate-400 font-bold uppercase tracking-widest">Shift</span>
+            <span className="text-[11px] text-slate-400 font-bold uppercase tracking-widest">{t('dashboard.shift')}</span>
             <div className="text-sm sm:text-base font-black text-slate-900 mt-1 truncate w-full">
-              {currentShift?.name}
+              {tm(currentShift?.name)}
             </div>
           </div>
           
@@ -105,9 +124,9 @@ const WorkerDashboard = () => {
               </div>
             )}
             <CheckSquare className="w-7 h-7 text-amber-500 mb-3" />
-            <span className="text-[11px] text-slate-400 font-bold uppercase tracking-widest">Tasks</span>
+            <span className="text-[11px] text-slate-400 font-bold uppercase tracking-widest">{t('navigation.myTasks')}</span>
             <div className="text-sm sm:text-base font-black text-slate-900 mt-1">
-              {pendingTasks} Pending
+              {pendingTasks} {t('common.pending')}
             </div>
           </div>
         </div>
@@ -115,7 +134,7 @@ const WorkerDashboard = () => {
 
       {/* MY PRIORITIES */}
       <div className="space-y-4">
-        <h3 className="text-[13px] font-bold text-slate-500 uppercase tracking-widest pl-1">My Priorities</h3>
+        <h3 className="text-[13px] font-bold text-slate-500 uppercase tracking-widest pl-1">{t('dashboard.priorities')}</h3>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Training Priority Card */}
@@ -125,17 +144,17 @@ const WorkerDashboard = () => {
                 <AlertTriangle className="w-6 h-6" />
               </div>
               <div className="pt-1 flex-1">
-                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">TRAINING</div>
-                <h4 className="text-lg font-black text-slate-900 leading-tight">Safety Refresher</h4>
+                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">{t('navigation.training')}</div>
+                <h4 className="text-lg font-black text-slate-900 leading-tight">{tm('Safety Refresher')}</h4>
                 <div className="inline-flex items-center mt-2 text-[11px] font-bold text-amber-700 bg-amber-100/50 px-2.5 py-1 rounded-lg border border-amber-200/50">
-                  Due Today
+                  {t('dashboard.dueToday')}
                 </div>
               </div>
             </div>
             
             <div className="space-y-2 mb-6 mt-auto">
               <div className="flex justify-between text-xs font-bold text-slate-600">
-                <span>Module Progress</span>
+                <span>{t('dashboard.moduleProgress')}</span>
                 <span>80%</span>
               </div>
               <div className="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden shadow-inner">
@@ -144,7 +163,7 @@ const WorkerDashboard = () => {
             </div>
             
             <Link to="/worker/training" className="w-full flex justify-center items-center py-3.5 px-4 rounded-xl shadow-sm text-sm font-bold text-slate-700 bg-slate-50 border border-slate-200 hover:bg-slate-100 transition-all focus:ring-2 focus:ring-slate-200">
-              Continue
+              {t('dashboard.continue')}
             </Link>
           </div>
 
@@ -156,16 +175,16 @@ const WorkerDashboard = () => {
                   <Wrench className="w-6 h-6" />
                 </div>
                 <div className="pt-1 flex-1">
-                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">CORRECTIVE ACTION</div>
-                  <h4 className="text-lg font-black text-slate-900 leading-snug">{ca.issue}</h4>
+                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">{t('navigation.myCorrectiveActions')}</div>
+                  <h4 className="text-lg font-black text-slate-900 leading-snug">{tm(ca.issue)}</h4>
                   <p className="text-xs text-slate-500 font-bold mt-2 flex items-center gap-1.5">
-                    <Clock3 className="w-4 h-4 text-slate-400" /> Due {ca.due}
+                    <Clock3 className="w-4 h-4 text-slate-400" /> {t('dashboard.due')} {ca.due}
                   </p>
                 </div>
               </div>
               
               <Link to="/worker/actions" className="mt-auto w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-[0_4px_14px_0_rgba(15,76,129,0.39)] text-sm font-bold text-white bg-[#136c4b] hover:bg-[#0b3b68] hover:shadow-[0_6px_20px_rgba(15,76,129,0.23)] hover:-translate-y-0.5 transition-all focus:ring-2 focus:ring-offset-2 focus:ring-[#136c4b]">
-                Open Task
+                {t('dashboard.openTask')}
               </Link>
             </div>
           ))}
@@ -174,42 +193,42 @@ const WorkerDashboard = () => {
 
       {/* QUICK ACTIONS */}
       <div className="space-y-4">
-        <h3 className="text-[13px] font-bold text-slate-500 uppercase tracking-widest pl-1">Quick Actions</h3>
+        <h3 className="text-[13px] font-bold text-slate-500 uppercase tracking-widest pl-1">{t('dashboard.quickActions')}</h3>
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           <Link to="/worker/tasks" className="bg-white/95 backdrop-blur-xl p-5 rounded-3xl border border-white border-b-slate-200 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] flex flex-col items-center justify-center text-center gap-3 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.08)] transition-all">
             <div className="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 text-[#136c4b] flex items-center justify-center shadow-sm">
               <CheckSquare className="w-6 h-6" />
             </div>
-            <span className="text-sm font-bold text-slate-800">My Tasks</span>
+            <span className="text-sm font-bold text-slate-800">{t('navigation.myTasks')}</span>
           </Link>
           
           <Link to="/worker/attendance" className="bg-white/95 backdrop-blur-xl p-5 rounded-3xl border border-white border-b-slate-200 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] flex flex-col items-center justify-center text-center gap-3 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.08)] transition-all">
             <div className="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 text-emerald-600 flex items-center justify-center shadow-sm">
               <Clock3 className="w-6 h-6" />
             </div>
-            <span className="text-sm font-bold text-slate-800">Attendance</span>
+            <span className="text-sm font-bold text-slate-800">{t('navigation.attendance')}</span>
           </Link>
           
           <Link to="/worker/reports" className="bg-white/95 backdrop-blur-xl p-5 rounded-3xl border border-white border-b-slate-200 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] flex flex-col items-center justify-center text-center gap-3 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.08)] transition-all">
             <div className="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 text-red-500 flex items-center justify-center shadow-sm">
               <AlertCircle className="w-6 h-6" />
             </div>
-            <span className="text-sm font-bold text-slate-800">Report</span>
+            <span className="text-sm font-bold text-slate-800">{t('dashboard.report')}</span>
           </Link>
           
           <Link to="/worker/training" className="bg-white/95 backdrop-blur-xl p-5 rounded-3xl border border-white border-b-slate-200 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] flex flex-col items-center justify-center text-center gap-3 hover:-translate-y-1 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.08)] transition-all">
             <div className="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 text-amber-500 flex items-center justify-center shadow-sm">
               <BookOpen className="w-6 h-6" />
             </div>
-            <span className="text-sm font-bold text-slate-800">Training</span>
+            <span className="text-sm font-bold text-slate-800">{t('navigation.training')}</span>
           </Link>
         </div>
       </div>
 
       {/* RECENT ACTIVITY */}
       <div className="space-y-4">
-        <h3 className="text-[13px] font-bold text-slate-500 uppercase tracking-widest pl-1">Recent Activity</h3>
+        <h3 className="text-[13px] font-bold text-slate-500 uppercase tracking-widest pl-1">{t('dashboard.recentActivity')}</h3>
         
         <div className="bg-white/95 backdrop-blur-xl rounded-3xl p-3 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] border border-white border-b-slate-200">
           {recentActivities.map((activity, idx) => (
@@ -222,15 +241,15 @@ const WorkerDashboard = () => {
                 <Activity className="w-5 h-5" />
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="text-sm font-bold text-slate-900 truncate">{activity.title || activity.message}</h4>
-                <p className="text-[11px] font-semibold text-slate-400 truncate mt-0.5 tracking-wide uppercase">{activity.time || 'Recently'}</p>
+                <h4 className="text-sm font-bold text-slate-900 truncate">{tm(activity.title || activity.message)}</h4>
+                <p className="text-[11px] font-semibold text-slate-400 truncate mt-0.5 tracking-wide uppercase">{tm(activity.time || t('dashboard.recently'))}</p>
               </div>
               <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-slate-400 transition-colors" />
             </Link>
           ))}
           {recentActivities.length === 0 && (
             <div className="p-6 text-center text-sm font-bold text-slate-400">
-              No recent activity
+              {t('dashboard.noRecentActivity')}
             </div>
           )}
         </div>

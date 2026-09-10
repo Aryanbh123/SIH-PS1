@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { WorkerProvider } from './context/WorkerContext';
 import { ManagerProvider } from './context/ManagerContext';
+import { LanguageProvider } from './context/LanguageContext';
 import AppShell from './components/layout/AppShell';
 import WorkerLayout from './components/layout/WorkerLayout';
 import ManagerLayout from './components/manager/ManagerLayout';
@@ -191,11 +192,13 @@ function AppRoutes() {
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
-    </AuthProvider>
+    <LanguageProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </AuthProvider>
+    </LanguageProvider>
   );
 }
 

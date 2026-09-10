@@ -26,6 +26,72 @@ export const languages = [
 
 export const translations = {
   en: {
+    common: {
+      pending: "Pending",
+      completed: "Completed",
+      inProgress: "In Progress",
+      verified: "Verified",
+      closed: "Closed",
+      save: "Save Changes",
+      cancel: "Cancel",
+      acknowledge: "Acknowledge"
+    },
+    navigation: {
+      dashboard: "Home",
+      myWork: "My Work",
+      attendance: "Attendance",
+      safety: "Safety",
+      profile: "Profile",
+      myTasks: "My Tasks",
+      myReports: "My Reports",
+      myCorrectiveActions: "My Corrective Actions",
+      myShifts: "My Shifts",
+      myCompliance: "My Compliance",
+      training: "Training",
+      documents: "Documents",
+      requests: "Requests",
+      notifications: "Notifications",
+      history: "History",
+      settings: "Settings"
+    },
+    dashboard: {
+      greeting: "Good morning, {name}",
+      currentShift: "Current Shift",
+      myDay: "My Day",
+      priorities: "Priority Tasks",
+      quickActions: "Quick Actions",
+      recentActivity: "Recent Activity",
+      present: "Present",
+      shift: "Shift",
+      dueToday: "Due Today",
+      moduleProgress: "Module Progress",
+      continue: "Continue",
+      due: "Due",
+      openTask: "Open Task",
+      report: "Report",
+      online: "Online",
+      onSchedule: "On Schedule",
+      noRecentActivity: "No recent activity",
+      recently: "Recently"
+    },
+    profile: {
+      title: "Profile",
+      editProfile: "Edit Profile",
+      personalInfo: "Personal Information",
+      workInfo: "Work Information",
+      language: "Language",
+      notifications: "Notifications",
+      security: "Application Security",
+      devices: "Manage Devices",
+      changePassword: "Change Password",
+      support: "Help & Support",
+      about: "About KoylaSetu",
+      selectLanguage: "Select Language"
+    },
+    validation: {
+      errorUserId: "Please enter your User ID.",
+      errorPassword: "Please enter your password."
+    },
     subtitle: "AI-powered Governance & Compliance Platform",
     selectLanguage: "Select Language",
     selectRole: "Select Role",
@@ -35,9 +101,8 @@ export const translations = {
     ministry: "DGMS Regulator",
     safetyOfficer: "Safety Officer",
     subsidiaryGM: "Subsidiary GM",
-    cilHqDirector: "CIL HQ Director",
+    cilHqDirector: "HQ Director",
     contractor: "Contractor",
-    employer: "Employer",
     userId: "User ID / Employee ID",
     password: "Password",
     signIn: "Sign In",
@@ -93,8 +158,88 @@ export const translations = {
     deadline: "Deadline",
     status: "Status",
     priority: "Priority"
+    worker: "Worker",
+    mock: {
+      morningShift: "Morning Shift",
+      safetyRefresher: "Safety Refresher",
+      miningWorker: "Mining Worker",
+      miningAreaA: "Mining Area A",
+      miningOperations: "Mining Operations",
+      kampteeColliery: "Kamptee Colliery",
+      wcl: "WCL",
+      twoActiveDevices: "2 Active Devices",
+      'Replace worn out safety boots': "Replace worn out safety boots",
+      'Task Assigned: Clear Conveyor Belt Jam': "Task Assigned: Clear Conveyor Belt Jam",
+      '2 hours ago': "2 hours ago"
+    }
   },
   hi: {
+    common: {
+      pending: "लंबित",
+      completed: "पूर्ण",
+      inProgress: "प्रगति में",
+      verified: "सत्यापित",
+      closed: "बंद",
+      save: "परिवर्तन सहेजें",
+      cancel: "रद्द करें",
+      acknowledge: "स्वीकार करें"
+    },
+    navigation: {
+      dashboard: "होम",
+      myWork: "मेरा कार्य",
+      attendance: "उपस्थिति",
+      safety: "सुरक्षा",
+      profile: "प्रोफ़ाइल",
+      myTasks: "मेरे कार्य",
+      myReports: "मेरी रिपोर्ट",
+      myCorrectiveActions: "मेरे सुधारात्मक कार्य",
+      myShifts: "मेरी शिफ्ट",
+      myCompliance: "मेरा अनुपालन",
+      training: "प्रशिक्षण",
+      documents: "दस्तावेज़",
+      requests: "अनुरोध",
+      notifications: "सूचनाएं",
+      history: "इतिहास",
+      settings: "सेटिंग्स"
+    },
+    dashboard: {
+      greeting: "शुभ प्रभात, {name}",
+      currentShift: "वर्तमान शिफ्ट",
+      myDay: "मेरा दिन",
+      priorities: "प्राथमिक कार्य",
+      quickActions: "त्वरित कार्रवाई",
+      recentActivity: "हाल की गतिविधि",
+      present: "उपस्थित",
+      shift: "शिफ्ट",
+      dueToday: "आज देय",
+      moduleProgress: "मॉड्यूल प्रगति",
+      continue: "जारी रखें",
+      due: "देय",
+      openTask: "कार्य खोलें",
+      report: "रिपोर्ट",
+      online: "ऑनलाइन",
+      onSchedule: "समय पर",
+      noRecentActivity: "कोई हाल की गतिविधि नहीं",
+      recently: "हाल ही में"
+    },
+    profile: {
+      title: "प्रोफ़ाइल",
+      editProfile: "प्रोफ़ाइल संपादित करें",
+      personalInfo: "व्यक्तिगत जानकारी",
+      workInfo: "कार्य जानकारी",
+      language: "भाषा",
+      notifications: "सूचनाएं",
+      security: "एप्लिकेशन सुरक्षा",
+      devices: "डिवाइस प्रबंधित करें",
+      changePassword: "पासवर्ड बदलें",
+      support: "सहायता और समर्थन",
+      about: "कोयलासेतु के बारे में",
+      selectLanguage: "भाषा चुनें"
+    },
+    validation: {
+      errorUserId: "कृपया अपना वर्कर आईडी दर्ज करें।",
+      errorPassword: "कृपया अपना पासवर्ड दर्ज करें।"
+    },
     subtitle: "एआई-संचालित शासन और अनुपालन मंच",
     selectLanguage: "भाषा चुनें",
     selectRole: "भूमिका चुनें",
@@ -157,8 +302,92 @@ export const translations = {
     deadline: "अंतिम तिथि",
     status: "स्थिति",
     priority: "प्राथमिकता"
+    worker: "कर्मचारी",
+    safetyOfficer: "सुरक्षा अधिकारी",
+    subsidiaryGM: "सहायक महाप्रबंधक",
+    cilHqDirector: "मुख्यालय निदेशक",
+    contractor: "ठेकेदार",
+    mock: {
+      morningShift: "सुबह की शिफ्ट",
+      safetyRefresher: "सुरक्षा रिफ्रेशर",
+      miningWorker: "खनन कर्मचारी",
+      miningAreaA: "खनन क्षेत्र ए",
+      miningOperations: "खनन कार्य",
+      kampteeColliery: "काम्पटी खदान",
+      wcl: "डब्ल्यूसीएल",
+      twoActiveDevices: "2 सक्रिय डिवाइस",
+      'Replace worn out safety boots': "पुराने सुरक्षा जूते बदलें",
+      'Task Assigned: Clear Conveyor Belt Jam': "कार्य सौंपा गया: कन्वेयर बेल्ट जाम साफ़ करें",
+      '2 hours ago': "2 घंटे पहले"
+    }
   },
   mr: {
+    common: {
+      pending: "प्रलंबित",
+      completed: "पूर्ण",
+      inProgress: "प्रगतीपथावर",
+      verified: "सत्यापित",
+      closed: "बंद",
+      save: "बदल जतन करा",
+      cancel: "रद्द करा",
+      acknowledge: "मान्य करा"
+    },
+    navigation: {
+      dashboard: "होम",
+      myWork: "माझी कामे",
+      attendance: "उपस्थिती",
+      safety: "सुरक्षा",
+      profile: "प्रोफाइल",
+      myTasks: "माझी कामे",
+      myReports: "माझे अहवाल",
+      myCorrectiveActions: "माझ्या सुधारात्मक कृती",
+      myShifts: "माझ्या शिफ्ट्स",
+      myCompliance: "माझे अनुपालन",
+      training: "प्रशिक्षण",
+      documents: "दस्तऐवज",
+      requests: "विनंत्या",
+      notifications: "सूचना",
+      history: "इतिहास",
+      settings: "सेटिंग्ज"
+    },
+    dashboard: {
+      greeting: "सुप्रभात, {name}",
+      currentShift: "सध्याची शिफ्ट",
+      myDay: "माझा दिवस",
+      priorities: "प्राधान्य कामे",
+      quickActions: "त्वरित कृती",
+      recentActivity: "अलीकडील क्रियाकलाप",
+      present: "उपस्थित",
+      shift: "शिफ्ट",
+      dueToday: "आज देय",
+      moduleProgress: "मॉड्यूल प्रगती",
+      continue: "सुरू ठेवा",
+      due: "देय",
+      openTask: "काम उघडा",
+      report: "अहवाल",
+      online: "ऑनलाइन",
+      onSchedule: "वेळेवर",
+      noRecentActivity: "कोणतीही अलीकडील क्रियाकलाप नाही",
+      recently: "नुकतेच"
+    },
+    profile: {
+      title: "प्रोफाइल",
+      editProfile: "प्रोफाइल संपादित करा",
+      personalInfo: "वैयक्तिक माहिती",
+      workInfo: "कामाची माहिती",
+      language: "भाषा",
+      notifications: "सूचना",
+      security: "अॅप्लिकेशन सुरक्षा",
+      devices: "डिव्हाइस व्यवस्थापित करा",
+      changePassword: "पासवर्ड बदला",
+      support: "मदत आणि समर्थन",
+      about: "कोयलासेतू बद्दल",
+      selectLanguage: "भाषा निवडा"
+    },
+    validation: {
+      errorUserId: "कृपया आपला वर्कर आयडी प्रविष्ट करा.",
+      errorPassword: "कृपया आपला पासवर्ड प्रविष्ट करा."
+    },
     subtitle: "एआय-सक्षम प्रशासन आणि अनुपालन प्लॅटफॉर्म",
     selectLanguage: "भाषा निवडा",
     selectRole: "भूमिका निवडा",
@@ -220,6 +449,24 @@ export const translations = {
     assignedTo: "नेमलेले",
     deadline: "अंतिम मुदत",
     priority: "प्राधान्य"
+    worker: "कामगार",
+    safetyOfficer: "सुरक्षा अधिकारी",
+    subsidiaryGM: "उपकंपनी महाव्यवस्थापक",
+    cilHqDirector: "मुख्यालय संचालक",
+    contractor: "कंत्राटदार",
+    mock: {
+      morningShift: "सकाळची शिफ्ट",
+      safetyRefresher: "सुरक्षा रिफ्रेशर",
+      miningWorker: "खाण कामगार",
+      miningAreaA: "खाण क्षेत्र अ",
+      miningOperations: "खाणकाम",
+      kampteeColliery: "कामठी कोळसा खाण",
+      wcl: "डब्लूसीएल",
+      twoActiveDevices: "2 सक्रिय डिव्हाइस",
+      'Replace worn out safety boots': "खराब झालेले सुरक्षा बूट बदला",
+      'Task Assigned: Clear Conveyor Belt Jam': "काम दिले: कन्व्हेयर बेल्ट जाम साफ करा",
+      '2 hours ago': "२ तासांपूर्वी"
+    }
   },
   bn: {
     subtitle: "এআই-চালিত শাসন ও কমপ্লায়েন্স প্ল্যাটফর্ম",
@@ -366,6 +613,60 @@ export const translations = {
     errorPassword: "অনুগ্ৰহ কৰি আপোনাৰ পাছৱৰ্ড প্ৰৱেশ কৰক।"
   },
   ur: {
+    common: {
+      pending: "زیر التواء",
+      completed: "مکمل",
+      inProgress: "جاری ہے",
+      verified: "تصدیق شدہ",
+      closed: "بند",
+      save: "تبدیلیاں محفوظ کریں",
+      cancel: "منسوخ کریں",
+      acknowledge: "تسلیم کریں"
+    },
+    navigation: {
+      dashboard: "ہوم",
+      myWork: "میرا کام",
+      attendance: "حاضری",
+      safety: "حفاظت",
+      profile: "پروفائل",
+      myTasks: "میرے کام",
+      myReports: "میری رپورٹس",
+      myCorrectiveActions: "میرے اصلاحی اقدامات",
+      myShifts: "میری شفٹیں",
+      myCompliance: "میری تعمیل",
+      training: "تربیت",
+      documents: "دستاویزات",
+      requests: "درخواستیں",
+      notifications: "اطلاعات",
+      history: "تاریخ",
+      settings: "ترتیبات"
+    },
+    dashboard: {
+      greeting: "صبح بخیر، {name}",
+      currentShift: "موجودہ شفٹ",
+      myDay: "میرا دن",
+      priorities: "ترجیحی کام",
+      quickActions: "فوری اقدامات",
+      recentActivity: "حالیہ سرگرمی"
+    },
+    profile: {
+      title: "پروفائل",
+      editProfile: "پروفائل میں ترمیم کریں",
+      personalInfo: "ذاتی معلومات",
+      workInfo: "کام کی معلومات",
+      language: "زبان",
+      notifications: "اطلاعات",
+      security: "ایپلی کیشن سیکیورٹی",
+      devices: "آلات کا نظم کریں",
+      changePassword: "پاس ورڈ تبدیل کریں",
+      support: "مدد اور تعاون",
+      about: "کوئلہ سیتو کے بارے میں",
+      selectLanguage: "زبان منتخب کریں"
+    },
+    validation: {
+      errorUserId: "براہ کرم اپنا ورکر آئی ڈی درج کریں۔",
+      errorPassword: "براہ کرم اپنا پاس ورڈ درج کریں۔"
+    },
     subtitle: "AI سے چلنے والا گورننس اور تعمیل کا پلیٹ فارم",
     selectLanguage: "زبان منتخب کریں",
     selectRole: "کردار منتخب کریں",
@@ -544,9 +845,31 @@ export const translations = {
 };
 
 // Fallback to English for languages without full translations yet
-export const t = (langCode, key) => {
-  if (translations[langCode] && translations[langCode][key]) {
-    return translations[langCode][key];
+export const t = (langCode, key, params = {}) => {
+  const getNested = (obj, path) => {
+    return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+  };
+  
+  let text = getNested(translations[langCode], key);
+  
+  if (!text && langCode !== 'en') {
+    text = getNested(translations['en'], key); // fallback to English
   }
   return (translations['en'] && translations['en'][key]) || key;
+  
+  // Also try root level if not found (for legacy support during transition)
+  if (!text && translations[langCode] && translations[langCode][key]) {
+    text = translations[langCode][key];
+  }
+  if (!text && translations['en'] && translations['en'][key]) {
+    text = translations['en'][key];
+  }
+  
+  if (!text) return key;
+  
+  Object.keys(params).forEach(p => {
+    text = text.replace(new RegExp('{' + p + '}', 'g'), params[p]);
+  });
+  
+  return text;
 };
