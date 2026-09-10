@@ -10,15 +10,15 @@ const Login = () => {
   const { login } = useAuth();
   
   const [selectedRole, setSelectedRole] = useState('manager');
-  const [userId, setUserId] = useState('');
-  const [password, setPassword] = useState('');
+  const [userId, setUserId] = useState('manager@demo.local');
+  const [password, setPassword] = useState('demo123');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   // 'en' is default language code
   const [language, setLanguage] = useState('en');
-  const [subsidiary, setSubsidiary] = useState('SECL - South Eastern Coalfields Limited');
+  const [subsidiary, setSubsidiary] = useState('WCL - Western Coalfields Limited');
 
   // We map the roles dynamically so their names translate
   const getRoles = (lang) => [
@@ -47,8 +47,8 @@ const Login = () => {
 
     setIsLoading(true);
     
-    // Attempt login
-    const result = await login(userId, password);
+    // Attempt login with language & subsidiary context
+    const result = await login(userId, password, { language, subsidiary });
     
     if (result.success) {
       setTimeout(() => {

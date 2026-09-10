@@ -10,9 +10,11 @@ export const demoUsers = [
     role: "manager",
     userId: "manager@demo.local",
     password: "demo123",
-    name: "Rajesh Kumar",
+    name: "Amit Sharma",
     designation: "Mine Manager",
-    avatar: "https://ui-avatars.com/api/?name=Rajesh+Kumar&background=0f4c81&color=fff"
+    subsidiary: "WCL",
+    mine: "Kamptee Colliery",
+    avatar: "https://ui-avatars.com/api/?name=Amit+Sharma&background=0f4c81&color=fff"
   },
   {
     role: "safety_officer",
