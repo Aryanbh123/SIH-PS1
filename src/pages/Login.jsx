@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { User, Briefcase, Building, Eye, EyeOff, Loader2, ShieldAlert, Users, Globe, HardHat, Factory, Lock, ChevronDown, Check } from 'lucide-react';
+import { User, Briefcase, Building, Eye, EyeOff, Loader2, ShieldAlert, Users, Globe, HardHat, Factory, Lock, ChevronDown, Check, AlertTriangle } from 'lucide-react';
 import { ComboBox, Label, Input, Button as AriaButton, Popover, ListBox, ListBoxItem } from 'react-aria-components';
 import { languages, t } from '../data/translations';
 
@@ -23,13 +23,13 @@ const Login = () => {
   // We map the roles dynamically so their names translate
   const getRoles = (lang) => [
     { id: 'manager', name: t(lang, 'manager'), icon: Briefcase },
+    { id: 'worker', name: t(lang, 'worker') || 'Worker', icon: HardHat },
     { id: 'safety_officer', name: t(lang, 'safetyOfficer') || 'Safety Officer', icon: ShieldAlert },
     { id: 'employee', name: t(lang, 'employee'), icon: User },
     { id: 'subsidiary_gm', name: t(lang, 'subsidiaryGM') || 'Subsidiary GM', icon: Users },
     { id: 'cil_hq_director', name: t(lang, 'cilHqDirector') || 'HQ Director', icon: Globe },
     { id: 'ministry', name: t(lang, 'ministry'), icon: Building },
-    { id: 'contractor', name: t(lang, 'contractor') || 'Contractor', icon: HardHat },
-    { id: 'employer', name: t(lang, 'employer') || 'Employer', icon: Factory }
+    { id: 'contractor', name: t(lang, 'contractor') || 'Contractor', icon: HardHat }
   ];
 
   const handleLogin = async (e) => {
@@ -248,6 +248,16 @@ const Login = () => {
                 </div>
               </div>
 
+              {selectedRole !== 'manager' && selectedRole !== 'worker' && (
+                <div className="bg-amber-50 border-l-4 border-amber-500 p-3 rounded-r text-sm text-amber-700 font-medium flex items-start shadow-sm">
+                  <AlertTriangle className="w-5 h-5 mr-2.5 flex-shrink-0 text-amber-500 mt-0.5" />
+                  <div>
+                    <strong>Under Maintenance</strong>
+                    <p className="mt-0.5 text-xs">This role portal is currently undergoing scheduled maintenance. Please try again later.</p>
+                  </div>
+                </div>
+              )}
+
               {error && (
                 <div className="bg-red-50 border-l-4 border-red-500 p-3 rounded-r text-sm text-red-700 font-medium flex items-center shadow-sm">
                   <ShieldAlert className="w-4 h-4 mr-2 flex-shrink-0" />
@@ -258,7 +268,7 @@ const Login = () => {
               <div className="pt-4">
                 <button
                   type="submit"
-                  disabled={isLoading}
+                  disabled={isLoading || (selectedRole !== 'manager' && selectedRole !== 'worker')}
                   className="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-[#136c4b] hover:bg-[#0e5239] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#136c4b] disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {isLoading ? (

@@ -13,6 +13,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^1.43.0",
     "react": "^19.2.8",
+    "react-aria-components": "^1.21.1",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.3",
     "recharts": "^3.10.1",

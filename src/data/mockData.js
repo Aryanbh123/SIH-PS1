@@ -63,12 +63,12 @@ export const demoUsers = [
     avatar: "https://ui-avatars.com/api/?name=LT+Mining&background=f43f5e&color=fff"
   },
   {
-    role: "employer",
-    userId: "employer@demo.local",
+    role: "worker",
+    userId: "worker@demo.local",
     password: "demo123",
-    name: "Adani Enterprises",
-    designation: "Employer",
-    avatar: "https://ui-avatars.com/api/?name=Adani+Enterprises&background=1e40af&color=fff"
+    name: "Rahul Sharma",
+    designation: "Mining Worker",
+    avatar: "https://ui-avatars.com/api/?name=Rahul+Sharma&background=0f4c81&color=fff"
   }
 ];
 

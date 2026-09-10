@@ -9,6 +9,8 @@ import RegulatorDashboard from '../components/dashboards/RegulatorDashboard';
 import ContractorDashboard from '../components/dashboards/ContractorDashboard';
 import EmployerDashboard from '../components/dashboards/EmployerDashboard';
 
+import WorkerDashboard from './worker/WorkerDashboard';
+
 const DashboardRouter = () => {
   const { currentUser } = useAuth();
 
@@ -31,6 +33,8 @@ const DashboardRouter = () => {
       return <ContractorDashboard />;
     case 'employer':
       return <EmployerDashboard />;
+    case 'worker':
+      return <WorkerDashboard />;
     default:
       // Fallback
       return <MineManagerDashboard />;
