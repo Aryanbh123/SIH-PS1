@@ -1,82 +1,72 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutGrid, ClipboardCheck, Clock3, ShieldCheck, User } from 'lucide-react';
+import { LayoutGrid, AlertTriangle, CheckSquare, Users, User } from 'lucide-react';
 import { useManager } from '../../context/ManagerContext';
 
 const ManagerBottomNav = () => {
-  const { kpis, attentionItems } = useManager();
-  const pendingActions = attentionItems?.length || 3;
+  const { correctiveActions, attentionItems } = useManager();
+  
+  const pendingActions = correctiveActions?.filter(a => a.status === 'open' || a.status === 'in_progress')?.length || 0;
+  const criticalAlerts = attentionItems?.filter(item => item.severity === 'critical')?.length || 0;
 
   return (
-    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-xl z-50 bg-white/95 backdrop-blur-md border-t border-slate-200/80 px-4 py-2 shadow-lg">
+    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-xl z-50 bg-white/95 backdrop-blur-md border-t border-slate-200/90 px-3 py-2 shadow-lg">
       <div className="flex items-center justify-around">
-        {/* Home Tab */}
         <NavLink 
-          to="/manager"
+          to="/manager" 
           end
           className={({ isActive }) => 
-            `flex flex-col items-center gap-1 transition-colors ${
-              isActive ? 'text-[#003366] font-bold' : 'text-slate-400 hover:text-slate-600'
-            }`
+            `flex flex-col items-center gap-1 transition-colors ${isActive ? 'text-[#003366] font-bold' : 'text-slate-400 hover:text-slate-600'}`
           }
         >
           <LayoutGrid className="w-5 h-5" />
-          <span className="text-[10px]">Home</span>
+          <span className="text-[10px]">Overview</span>
         </NavLink>
         
-        {/* Operations / Shifts Tab */}
         <NavLink 
-          to="/manager/shifts"
+          to="/manager/risk"
           className={({ isActive }) => 
-            `flex flex-col items-center gap-1 transition-colors ${
-              isActive ? 'text-[#003366] font-bold' : 'text-slate-400 hover:text-slate-600'
-            }`
+            `flex flex-col items-center gap-1 relative transition-colors ${isActive ? 'text-[#003366] font-bold' : 'text-slate-400 hover:text-slate-600'}`
           }
         >
-          <Clock3 className="w-5 h-5" />
-          <span className="text-[10px]">Operations</span>
+          <AlertTriangle className="w-5 h-5" />
+          <span className="text-[10px]">Risk Intel</span>
+          {criticalAlerts > 0 && (
+            <span className="absolute -top-1 right-2 w-3.5 h-3.5 bg-rose-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+              {criticalAlerts}
+            </span>
+          )}
         </NavLink>
         
-        {/* Inspections Tab with Badge */}
         <NavLink 
-          to="/manager/inspections"
+          to="/manager/actions"
           className={({ isActive }) => 
-            `flex flex-col items-center gap-1 relative transition-colors ${
-              isActive ? 'text-[#003366] font-bold' : 'text-slate-400 hover:text-slate-600'
-            }`
+            `flex flex-col items-center gap-1 relative transition-colors ${isActive ? 'text-[#003366] font-bold' : 'text-slate-400 hover:text-slate-600'}`
           }
         >
-          <div className="relative">
-            <ClipboardCheck className="w-5 h-5" />
-            {pendingActions > 0 && (
-              <span className="absolute -top-1 -right-2 w-4 h-4 bg-amber-500 text-slate-950 text-[9px] font-black rounded-full flex items-center justify-center shadow-xs">
-                {pendingActions}
-              </span>
-            )}
-          </div>
-          <span className="text-[10px]">Inspections</span>
+          <CheckSquare className="w-5 h-5" />
+          <span className="text-[10px]">Actions</span>
+          {pendingActions > 0 && (
+            <span className="absolute -top-1 right-1 w-3.5 h-3.5 bg-amber-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+              {pendingActions}
+            </span>
+          )}
         </NavLink>
         
-        {/* Safety & DGMS Tab */}
         <NavLink 
-          to="/manager/compliance"
+          to="/manager/workforce"
           className={({ isActive }) => 
-            `flex flex-col items-center gap-1 transition-colors ${
-              isActive ? 'text-[#003366] font-bold' : 'text-slate-400 hover:text-slate-600'
-            }`
+            `flex flex-col items-center gap-1 transition-colors ${isActive ? 'text-[#003366] font-bold' : 'text-slate-400 hover:text-slate-600'}`
           }
         >
-          <ShieldCheck className="w-5 h-5" />
-          <span className="text-[10px]">Safety</span>
+          <Users className="w-5 h-5" />
+          <span className="text-[10px]">Workforce</span>
         </NavLink>
         
-        {/* Profile Tab */}
         <NavLink 
           to="/manager/profile"
           className={({ isActive }) => 
-            `flex flex-col items-center gap-1 transition-colors ${
-              isActive ? 'text-[#003366] font-bold' : 'text-slate-400 hover:text-slate-600'
-            }`
+            `flex flex-col items-center gap-1 transition-colors ${isActive ? 'text-[#003366] font-bold' : 'text-slate-400 hover:text-slate-600'}`
           }
         >
           <User className="w-5 h-5" />
